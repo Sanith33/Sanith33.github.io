@@ -1,33 +1,649 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Light fox studio</title>
-    <Style> 
-body {
-      background-image: url("websooncopy.jpg");
-      background-size: 1920px,1080px;
-      background-repeat: no-repeat;
-    background-size: cover;
-  }
-    @media (max-width: 1920px) {
-  body {
-    background-image: url("websooncopy.jpg");
-    background-size: 1920px,1080px;
-    background-repeat: no-repeat;
-      background-size: cover;
-  }
-}
-  @media  (max-width: 1366px) {
-  body {
-    background-image: url("websooncopy.jpg");
-    background-size: 1366px,768px;
-    background-repeat: no-repeat;
-      background-size: cover;
-  }
-}
-</Style>
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Light Fox Studio - 3D Modeling</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+    <style>
+        /* Custom for slider dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            background-color: #f97316;
+            /* orange-500 */
+            opacity: 0.3;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .slider-dot.active {
+            opacity: 1;
+        }
+
+        @font-face {
+            font-family: 'GoodTimes';
+            src: url('Good-Times-Rg.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'RaceSports';
+            src: url('Race-Sport.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        a.glass-hover {
+            position: relative;
+            display: inline-block;
+            padding: 0.25em 0.5em;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        a.glass-hover::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.7s ease;
+        }
+
+        a.glass-hover:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        a.glass-hover:hover::before {
+
+            transform: rotate(45deg) translateX(100%);
+        }
+
+
+        .motto {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .motto span {
+            margin: 0 0.5rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .description {
+            font-weight: 400;
+            font-size: 1rem;
+            color: #4e5566;
+            max-width: 700px;
+            margin: 0 auto 3.5rem auto;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .brands {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem 2rem;
+            margin-left: 12rem;
+            margin-right: 12rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .brand {
+            background-color: #fff;
+            padding: 1.4rem 0;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgb(50 56 71 / 0.06);
+            font-weight: 700;
+            font-size: 1.15rem;
+            cursor: default;
+            user-select: none;
+            transition: box-shadow 0.3s ease;
+            justify-content: center;
+            text-align: center;
+        }
+
+
+        .brand:hover,
+        .brand:focus {
+            box-shadow: 0 8px 20px rgb(50 56 71 / 0.12);
+            outline: none;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-motto {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #323847;
+            letter-spacing: 0.05em;
+            user-select: none;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .clientheader {
+            background-color: #f7f8fa;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            font-weight: 700;
+            font-size: 1.8rem;
+            font-family: "poppins";
+            letter-spacing: 3px;
+            color: #323847;
+            user-select: none;
+            text-align: center;
+        }
+
+        .glass-slider {
+            width: 90%;
+            max-width: 1200px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .text-content {
+            flex: 1;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+        }
+
+        .image-content {
+            flex: 1;
+            padding-left: 4rem;
+            padding-right: 1.25rem;
+            padding-top: 3rem;
+            padding-bottom: 3.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
+            transform: perspective(800px) rotateY(10deg);
+            transition: all 0.5s ease;
+        }
+
+        .slider-image:hover {
+            transform: perspective(800px) rotateY(0deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            align-self: flex-start;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(228, 227, 227, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: rgb(255, 255, 255);
+            transform: scale(1.2);
+            border: 2px solid #c8c8c9;
+        }
+
+        .glass-reflections::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .connect {
+            position: fixed;
+            bottom: 20px;
+            left: 150px;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .connect:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
-<body>
+
+<body class="bg-white text-gray-900 font-sans">
+    <div class="w-full h-screen bg-[url('/fox.png')] bg-cover bg-center">
+        <!-- Navigation -->
+        <header class="flex items-center justify-between px-8 py-4 sticky top-0  z-30">
+            <div class="flex items-center space-x-4">
+                <div class=" pl-8 w-32 h-1 rounded-md flex items-center justify-center font-bold text-white
+ text-xl  cursor-pointer select-none">
+                    <img src="light fox logo v5.png" alt="" />
+                </div>
+            </div>
+            <nav>
+                <ul class="hidden md:flex space-x-8 font-medium text-sm text-white
+">
+                    <li><a href="#home" class="hover:text-orange-500 transition">Home</a></li>
+                    <li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li>
+                    <li><a href="#services" class="hover:text-orange-500 transition">Service</a></li>
+                    <li><a href="#careers" class="hover:text-orange-500 transition">Careers</a></li>
+                    <li><a href="about.html" class="hover:text-orange-500 transition">About</a></li>
+                    <li><a href="mailto:contact@lightfoxstudio.com" class="hover:text-orange-500 transition">Contact Us</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="max-w-7xl mx-auto pr-6 md:pr-12 mt-10">
+
+            <!-- Hero Section -->
+            <section id="home"
+                class="relative w-full rounded-md overflow-hidden flex flex-col md:flex-row items-left justify-left pt-10 pr-10 pb-10 gap-10">
+
+                <!-- Text -->
+                <div
+                    class="flex flex-col justify-center w-max space-y-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg text-white">
+                    <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-2xl font-bold mb-2"
+                        style="font-family: 'GoodTimes', sans-serif; letter-spacing: 6px;">
+                        Light Fox Studio
+                    </h1>
+                    <h2 class="text-2xl font-bold text-white/80 mb-2">
+                        Masters of Product 3D - From Idea to Impact
+                    </h2>
+                    <p class="text-white/50 text-lg md:text-xl leading-relaxed max-w-md">
+                        Your products deserve more than just pictures. At Light Fox Studio, we craft stunning 3D visuals
+                        that make your brand stand out — powered by passion, precision, and pixels.
+                    </p>
+                    <button
+                        class="bg-orange-500 hover:bg-orange-600 text-white rounded-lg px-6 py-3 font-semibold w-max transition"
+                        aria-label="Contact Light Fox Studio" onclick="window.location='#contact'">
+                        Contact Us
+                    </button>
+                </div>
+
+    </div>
+    </section>
+    </div>
+    <!-- What We Provide Section -->
+    <section id="provide" class="mt-20 max-w-5xl mx-auto text-center space-y-6">
+        <h2 class="text-3xl font-semibold text-gray-800">What We Provide</h2>
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+            Light Fox Studio specializes in creating high-quality 3D assets and CGI product commercials tailored for
+            eCommerce and marketing. We convert entire product catalogs into 3D Assets or visuals, helping brands
+            showcase their products in a more immersive way. Additionally, we collaborate with 3D asset outsourcing
+            companies, offering flexible and scalable production support.
+            We deliver photorealistic 3D modeling, animations, and product renders to clients worldwide.
+        </p>
+    </section>
+
+    <!-- Our Clients Section
+    <section id="clients" class="mt-24 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Our Impact</h2>
+        <div class="flex flex-wrap justify-center gap-12 items-center" style="font-family: 'RaceSports', sans-serif;">
+            <div class="font-semibold text-4xl select-none">Furniture Stop UK</div>
+            <div class="font-semibold text-4xl select-none">Xome International</div>
+            <div class="font-semibold text-4xl select-none">Epson</div>
+            <div class="font-semibold text-4xl select-none">Avataar</div>
+            <div class="font-semibold text-4xl select-none">Vntana</div>
+        </div>
+    </section> -->
+
+
+    <div class="clientheader">OUR IMPACT</div>
+
+    <p class="motto">
+        Digital Soul.<span>Unreal Skin.</span><span>Fox-Driven.</span>
+    </p>
+    <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+        At Light Fox Studio, we help organizations leverage design as a strategic advantage — to grow profits, attract
+        talent, and strengthen brand value. Whether you’re a scaling startup or an established enterprise, we create
+        tailored visual solutions that deliver meaningful results. Our clients span industries and borders, but they
+        share one thing in common: a belief that design, when done right, can transform business outcomes.
+    </p>
+    <section class="brands" aria-label="Our Clients">
+        <div tabindex="0" class="brand">XOME UK</div>
+        <div tabindex="0" class="brand">AVTAAR</div>
+        <div tabindex="0" class="brand">VANTNA</div>
+        <div tabindex="0" class="brand ">FURNITURE STOP</div>
+        <div tabindex="0" class="brand">EPSON</div>
+        <div tabindex="0" class="brand">ANABEL</div>
+    </section>
+    <div class="text-xl font-semibold tracking-wide text-center pb-6">
+        Creative expertise.&nbsp;&nbsp;&nbsp;Reliable delivery.&nbsp;&nbsp;&nbsp;Long-term impact.
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="py-12 px-48 mr-0 block"
+        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <h2 class="text-5xl text-white font-semibold text-gray-900 mb-8 text-center">Wide Range of Service in 3D</h2>
+        <br />
+        <!-- 
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="border rounded-lg p-6 shadow-sm hover:shadow-lg transition cursor-default">
+                <h3 class="text-xl font-semibold mb-3 text-orange-500">3D Asset Production</h3>
+                <p class="text-gray-600">Creation of high-quality 3D assets optimized for eCommerce and product
+                    visualization.</p>
+            </div>
+            <div class="border rounded-lg p-6 shadow-sm hover:shadow-lg transition cursor-default">
+                <h3 class="text-xl font-semibold mb-3 text-orange-500">3D Product Animation</h3>
+                <p class="text-gray-600">Engaging animated presentations to highlight your product’s features
+                    dynamically.</p>
+            </div>
+            <div class="border rounded-lg p-6 shadow-sm hover:shadow-lg transition cursor-default">
+                <h3 class="text-xl font-semibold mb-3 text-orange-500">CGI Product Rendering</h3>
+                <p class="text-gray-600">Photo-realistic computer-generated images to showcase your products in the
+                    best light.</p>
+            </div>
+            <div class="border rounded-lg p-6 shadow-sm hover:shadow-lg transition cursor-default">
+                <h3 class="text-xl font-semibold mb-3 text-orange-500">Game Ready Assets</h3>
+                <p class="text-gray-600">Optimized 3D assets for game engines ensuring high performance and visual
+                    fidelity.</p>
+            </div>
+            <div class="border rounded-lg p-6 shadow-sm hover:shadow-lg transition cursor-default md:col-span-2">
+                <h3 class="text-xl font-semibold mb-3 text-orange-500">Auto-Motive 3D Production</h3>
+                <p class="text-gray-600">Specialized production of automotive 3D models and animations for marketing
+                    and visualization.</p>
+            </div>
+        </div> -->
+
+
+        <div class="glass-slider w-full">
+            <div class="text-content">
+                <h1 class="text-6xl font-bold">Discover Our Creative Solutions</h1>
+                <p>Explore our innovative products designed to enhance your digital experience. With cutting-edge
+                    technology and elegant design, we bring your vision to life.</p>
+                <a href="mailto:contact@lightfoxstudio.com" class="btn connect">Lets Connect</a>
+
+                <div class="slider-controls">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+            </div>
+
+            <div class="image-content">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e82193d-1c00-434d-8abe-9cfefffc4de3.png"
+                    alt="Modern futuristic digital interface with glowing blue elements floating in dark space"
+                    class="slider-image">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Careers Section (Placeholder) -->
+    <section id="careers" class="mt-24 max-w-5xl mx-auto text-center pt-12 pb-20 ">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-4">Careers at Light Fox Studio</h2>
+        <p class="text-gray-700 max-w-lg mx-auto">
+            We're a growing remote startup always looking for passionate 3D artists, animators, and technical
+            talents.
+            Join us to work fully remotely and help push the boundaries of eCommerce 3D production.
+        </p>
+        <button class="mt-6 bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition"
+            aria-label="Apply for careers at Light Fox Studio" onclick="sendEmail()">
+            Apply Now
+        </button>
+    </section>
+
+    <!-- About Section -->
+    <!-- <section id="about" class="max-w-5xl mx-auto mt-24 mb-24 text-gray-700 leading-relaxed text-center px-6">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">About Light Fox Studio</h2>
+        <p class="max-w-3xl mx-auto text-gray-700">
+            Light Fox Studio is a fully online, remote-first startup specializing in high-quality 3D modeling and
+            animation services for eCommerce and other industries. We operate without physical office space,
+            enabling us to collaborate with top talent worldwide. Our mission is to help brands showcase their
+            products with cutting-edge 3D visuals.
+        </p>
+    </section> -->
+
+    </main>
+
+    <footer class="w-full bg-gradient-to-t from-[#2b2b2b] to-[#3f3f3f] text-white">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <!-- Top section -->
+            <div class="flex items-center space-x-6 border-b border-gray-600 pb-8">
+                <!-- Abstract logos: recreated the 3D swirl balloon abstract with placehold.co image -->
+                <img src="footer-flower.png"
+                    alt="Abstract 3D swirl sphere with white and pink curved layered petals, glossy and modern style"
+                    class="h-12 w-12 object-contain" onerror="this.style.display='none'" />
+                <h1 class="text-4xl font-semibold select-none">Lets Work Together !</h1>
+            </div>
+
+            <!-- Middle content columns -->
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm leading-relaxed">
+                <!-- Company info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="logo-circle"></span>
+                        <h2 class="text-white font-bold text-lg" style="font-family: 'GoodTimes', sans-serif;">LIGHT FOX STUDIO</h2>
+                    </div>
+                    <p class="text-gray-300 leading-tight text-base">
+                        We are a creativity-driven 3D studio.
+                        We collaborate with brands and businesses to deliver high-quality 3D
+                        models, AR/VR solutions, and realistic product renders.
+                        From eCommerce to automotive, our work helps clients stand out.
+                    </p>
+                </div>
+
+                <!-- Quick access -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">QUICK ACESS</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="footer-link">About</li>
+                        <li class="footer-link">Portfolio</li>
+                        <li class="footer-link">Service</li>
+                        <li class="footer-link">Carriers</li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">SERVICES</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="footer-link">AR / VR Solutions</li>
+                        <li class="footer-link">Automotive 3D Assets</li>
+                        <li class="footer-link">3D Print Models</li>
+                        <li class="footer-link">Realistic renders</li>
+                    </ul>
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">ADDRESS</h3>
+                    <address class="not-italic text-gray-300 space-y-1 mb-4">
+                        Light Fox Studio is a fully online, remote-first startup specializing in high-quality 3D
+                        modeling and animation services for eCommerce and other industries. We operate without physical
+                        office space,
+                    </address>
+                    <p class="text-gray-300 font-semibold">MAIL ID :</p>
+                    <a href="mailto:contact@lightfoxstudio.com" class="text-yellow-400 underline hover:text-yellow-300"
+                        style="text-decoration: none;">contact@lightfoxstudio.com</a>
+                </div>
+            </div>
+
+            <!-- Bottom copyright -->
+            <div class="mt-12 text-center text-gray-500 text-xs select-none">
+                © Copyright 2025 Light Fox Studios. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        function sendEmail() {
+            window.location.href = "mailto:carrers@lightfoxstudio.com";
+        }
+
+        function contactEmail() {
+            window.location.href = "mailto:contact@lightfoxstudio.com";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const dots = document.querySelectorAll('.slider-dot');
+            let currentSlide = 0;
+            const slideImages = [
+                {
+                    text: "AR/ VR SOLUTIONS",
+                    desc: "At LightFox Studio, we create immersive Augmented and Virtual Reality experiences.\n We help brands tell stories that users can touch, feel, and remember.\n Our solutions boost customer engagement and brand loyalty. From product visualization to interactive marketing — we cover it all. \n We bring your business to life through cutting-edge 3D technology.AR that speaks. VR that connects.",
+                    imgAlt: "Modern futuristic digital interface with glowing blue elements floating in dark space",
+                    imgSrc: "slider-1.jpg"
+                },
+                {
+                    text: "Automotive 3D Models",
+                    desc: "At LightFox Studio, we specialize in high-precision automotive 3D modeling. \n From concept cars to production-ready models — we craft every detail with care. Clean topology, realistic proportions, and showroom-quality finishes. Ideal for commercials, configurators, games, AR/VR, and simulations. Interior, exterior, wheels, lights — modeled to perfection.",
+                    imgAlt: "Abstract technology concept with floating neural network nodes and connections",
+                    imgSrc: "slider-2.png"
+                },
+                {
+                    text: "3D Print Models",
+                    desc: "At LightFox Studio, we bring ideas to life with precision 3D printable models.\n From prototypes to art pieces — we design for real-world impact.\n Our models are clean, optimized, and print-ready.\n Perfect for manufacturing, architecture, jewelry, and collectibles.",
+                    imgAlt: "Sleek modern product design with golden highlights on dark background",
+                    imgSrc: "slider-3.png"
+                },
+                {
+                    text: "Realistic Renders",
+                    desc: "At LightFox Studio, we turn your product into a visual masterpiece. Photorealistic renders that capture every texture, curve, and detail. Perfect for ads, packaging, e-commerce, and presentations. \n We bring out the true essence of your product — before it even exists. Accurate lighting, materials, and reflections for stunning visuals. From tech gadgets to luxury items — we’ve done it all.",
+                    imgAlt: "Person using a tablet with a glowing UI interface showing complex data visualizations",
+                    imgSrc: "slider-4.png"
+                }
+            ];
+
+            function changeSlide(index) {
+                const textContent = document.querySelector('.text-content');
+                const h1 = textContent.querySelector('h1');
+                const p = textContent.querySelector('p');
+                const img = document.querySelector('.slider-image');
+
+                h1.textContent = slideImages[index].text;
+                p.textContent = slideImages[index].desc;
+                img.alt = slideImages[index].imgAlt;
+                img.src = slideImages[index].imgSrc;
+
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    changeSlide(index);
+                });
+            });
+
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slideImages.length;
+                changeSlide(currentSlide);
+            }, 5000);
+
+            changeSlide(0); // Initialize first slide
+        });
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+
+    </script>
 </body>
+
 </html>
