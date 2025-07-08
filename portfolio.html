@@ -111,6 +111,183 @@
             margin-top: 2rem;
             margin-bottom: 2rem;
         }
+
+
+
+        #home {
+            padding-top: 2.5rem;
+            padding-right: 2.5rem;
+            padding-bottom: 2.5rem;
+            gap: 2.5rem;
+            width:max-content
+        }
+
+
+
+        @media (max-width: 576px) {
+            .glass-slider {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+            }
+
+            .text-content,
+            .image-content {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            p {
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .btn {
+                align-self: center;
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
+
+            .description {
+                font-size: 0.95rem;
+                text-align: center;
+                margin: 0 1rem 2rem 1rem;
+            }
+
+            .motto,
+            .motto span,
+            .footer-motto,
+            .clientheader {
+                font-size: 1rem;
+                margin: 1rem 0;
+                flex-direction: column;
+            }
+
+            .connect {
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            #services {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            #home {
+                padding-top: 2rem;
+                padding-right: 1rem;
+                padding-bottom: 1rem;
+                margin-bottom: 8rem;
+                gap: 1rem;
+                width:100%;
+            }
+
+            #home div p{
+                font-size: medium;
+            }
+
+            #home div h1{
+                font-size: Large;
+            }
+
+            .quick-access {
+                padding: 0.5rem 0;
+                border-top: 1px solid #4b5563;
+                /* Tailwind border-gray-600 */
+                margin-top: 1rem;
+            }
+
+            .quick-access h3 {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .quick-access ul li a {
+                display: block;
+                padding: 0.5rem 0;
+                font-size: 0.95rem;
+            }
+
+            .footer-services {
+                padding: 1rem 0;
+                border-top: 1px solid #4b5563;
+                /* Tailwind border-gray-600 */
+                margin-top: 1rem;
+            }
+
+            .footer-services h3 {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .footer-services ul li {
+                padding: 0.4rem 0;
+                font-size: 0.95rem;
+            }
+
+            .footer-address {
+                display: block;
+                width: 100%;
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                border-top: 1px solid #4b5563;
+                /* Tailwind's border-gray-600 */
+            }
+
+            .footer-address h3 {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .footer-address address {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            .footer-address a {
+                display: inline-block;
+                margin-top: 0.5rem;
+                font-size: 0.95rem;
+                word-break: break-word;
+
+            }
+
+            .footer-address .flex {
+                margin-top: 1rem;
+            }
+
+            .glass-card {
+                padding: 1rem !important;
+                margin: 0 1rem;
+            }
+
+            .glass-card h1,
+            .glass-card p,
+            .glass-card a {
+                font-size: 0.95rem;
+                text-align: left;
+            }
+            header{
+                padding-left: 0;
+            }
+
+            section{
+                padding: 2rem;
+                justify-self: center;
+                align-self: center;
+            }
+
+        }
+
+
     </style>
 </head>
 
@@ -124,6 +301,19 @@
                 </div>
             </div>
             <nav>
+                <button id="menu-toggle" class="md:hidden flex flex-col space-y-1 p-2">
+                    <span class="w-6 h-0.5 bg-white"></span>
+                    <span class="w-6 h-0.5 bg-white"></span>
+                    <span class="w-6 h-0.5 bg-white"></span>
+                </button>
+                <ul id="mobile-menu"
+                    class="flex flex-col space-y-4 font-medium text-sm text-white mt-4 md:hidden hidden">
+                    <li><a href="index.html" class="hover:text-orange-500">Home</a></li>
+                    <li><a href="#" class="hover:text-orange-500">Portfolio</a></li>
+                    <li><a href="about.html" class="hover:text-orange-500">About</a></li>
+                    <li><a href="mailto:contact@lightfoxstudio.com" class="hover:text-orange-500">Contact Us</a></li>
+                </ul>
+
                 <ul id="navbar" class="hidden md:flex space-x-8 font-medium text-sm text-white">
                     <li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition">Portfolio</a></li>
@@ -136,11 +326,11 @@
 
         <main class="max-w-7xl mx-auto pr-6 md:pr-12 mt-10 ">
             <section id="home"
-                class="relative w-full rounded-md overflow-hidden flex flex-col md:flex-row items-left justify-left pt-10 pr-10 pb-16 gap-10 mb-16">
+                class="relative rounded-md overflow-hidden flex flex-col md:flex-row items-left justify-left pt-10 pr-10 pb-16 gap-10 mb-16">
 
                 <!-- Text -->
                 <div
-                    class="flex flex-col justify-center w-max space-y-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg text-white ">
+                    class="flex flex-col justify-center w-full space-y-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg text-white ">
                     <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-2xl font-bold mb-2 text-center"
                         style="font-family: 'GoodTimes', sans-serif; letter-spacing: 6px;">
                         Light Fox Studio
@@ -202,7 +392,7 @@
             <section class="max-w-7xl mx-auto">
                 <div
                     class="image-tile relative bg-gradient-to-br from-blue-gray-400 to-slate-100 rounded-lg overflow-hidden">
-                    <img class="w-full h-full object-cover rounded-lg" src="perfume-2.jpg"
+                    <img class="w-full h-full object-cover rounded-lg" src="perfume-2.png"
                         alt="Stylish cat-eye sunglasses resting on sunlit rock with cool pale blue and gray backdrops"
                         loading="lazy" onerror="this.style.display='none'" />
                 </div>
@@ -236,78 +426,91 @@
                 </div>
             </section>
         </main>
-        <footer class="w-full bg-gradient-to-t from-[#2b2b2b] to-[#3f3f3f] text-white">
-            <div class="max-w-7xl mx-auto px-6 py-12">
-                <!-- Top section -->
-                <div class="flex items-center space-x-6 border-b border-gray-600 pb-8">
-                    <!-- Abstract logos: recreated the 3D swirl balloon abstract with placehold.co image -->
-                    <img src="footer-flower.png"
-                        alt="Abstract 3D swirl sphere with white and pink curved layered petals, glossy and modern style"
-                        class="h-12 w-12 object-contain" onerror="this.style.display='none'" />
-                    <h1 class="text-4xl font-semibold select-none">Lets Work Together !</h1>
+    <footer class="w-full bg-gradient-to-t from-[#2b2b2b] to-[#3f3f3f] text-white">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <!-- Top section -->
+            <div class="flex items-center space-x-6 border-b border-gray-600 pb-8">
+                <!-- Abstract logos: recreated the 3D swirl balloon abstract with placehold.co image -->
+                <img src="footer-flower.png"
+                    alt="Abstract 3D swirl sphere with white and pink curved layered petals, glossy and modern style"
+                    class="h-12 w-12 object-contain" onerror="this.style.display='none'" />
+                <h1 class="text-4xl font-semibold select-none">Lets Work Together !</h1>
+            </div>
+
+            <!-- Middle content columns -->
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm leading-relaxed">
+                <!-- Company info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="logo-circle"></span>
+                        <h2 class="text-white font-bold text-lg" style="font-family: 'GoodTimes', sans-serif;">LIGHT FOX
+                            STUDIO</h2>
+                    </div>
+                    <p class="text-gray-300 leading-tight text-base">
+                        We are a creativity-driven 3D studio.
+                        We collaborate with brands and businesses to deliver high-quality 3D
+                        models, AR/VR solutions, and realistic product renders.
+                        From eCommerce to automotive, our work helps clients stand out.
+                    </p>
                 </div>
 
-                <!-- Middle content columns -->
-                <div class="mt-10 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm leading-relaxed">
-                    <!-- Company info -->
-                    <div>
-                        <div class="flex items-center mb-4">
-                            <span class="logo-circle"></span>
-                            <h2 class="text-white font-bold text-lg" style="font-family: 'GoodTimes', sans-serif;">LIGHT
-                                FOX STUDIO</h2>
-                        </div>
-                        <p class="text-gray-300 leading-tight text-base">
-                            We are a creativity-driven 3D studio.
-                            We collaborate with brands and businesses to deliver high-quality 3D
-                            models, AR/VR solutions, and realistic product renders.
-                            From eCommerce to automotive, our work helps clients stand out.
-                        </p>
-                    </div>
-
-                    <!-- Quick access -->
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">QUICK ACESS</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li class="footer-link">About</li>
-                            <li class="footer-link">Portfolio</li>
-                            <li class="footer-link">Service</li>
-                            <li class="footer-link">Carriers</li>
-                        </ul>
-                    </div>
-
-                    <!-- Services -->
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">SERVICES</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li class="footer-link">AR / VR Solutions</li>
-                            <li class="footer-link">Automotive 3D Assets</li>
-                            <li class="footer-link">3D Print Models</li>
-                            <li class="footer-link">Realistic renders</li>
-                        </ul>
-                    </div>
-
-                    <!-- Address -->
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">ADDRESS</h3>
-                        <address class="not-italic text-gray-300 space-y-1 mb-4">
-                            Light Fox Studio is a fully online, remote-first startup specializing in high-quality 3D
-                            modeling and animation services for eCommerce and other industries. We operate without
-                            physical
-                            office space,
-                        </address>
-                        <p class="text-gray-300 font-semibold">MAIL ID :</p>
-                        <a href="mailto:contact@lightfoxstudio.com"
-                            class="text-yellow-400 underline hover:text-yellow-300"
-                            style="text-decoration: none;">contact@lightfoxstudio.com</a>
-                    </div>
+                <!-- Quick access -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">QUICK ACESS</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="footer-link"><a href="about.html">About</a></li>
+                        <li class="footer-link"><a href="portfolio.html">Portfolio</a></li>
+                        <li class="footer-link"><a href="#services">Service</a></li>
+                        <li class="footer-link"><a href="mailto:carrers@lightfoxstudio.com">Carriers</a></li>
+                    </ul>
                 </div>
 
-                <!-- Bottom copyright -->
-                <div class="mt-12 text-center text-gray-500 text-xs select-none">
-                    © Copyright 2025 Light Fox Studios. All Rights Reserved.
+                <!-- Services -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">SERVICES</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="footer-link">AR / VR Solutions</li>
+                        <li class="footer-link">Automotive 3D Assets</li>
+                        <li class="footer-link">3D Print Models</li>
+                        <li class="footer-link">Realistic renders</li>
+                    </ul>
+                </div>
+
+                <!-- Address -->
+                <div class="footer-address">
+                    <h3 class="text-white font-semibold mb-4">ADDRESS</h3>
+                    <address class="not-italic text-gray-300 space-y-1 mb-4">
+                        Light Fox Studio is a fully online, remote-first startup specializing in high-quality 3D
+                        modeling and animation services for eCommerce and other industries. We operate without physical
+                        office space,
+                    </address>
+                    <p class="text-gray-300 font-semibold">MAIL ID :</p>
+                    <a href="mailto:contact@lightfoxstudio.com" class="text-yellow-400 underline hover:text-yellow-300"
+                        style="text-decoration: none;">contact@lightfoxstudio.com</a>
+
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/light_fox_studio/" target="_blank">
+                            <img src="insta-icon.png" class="w-6 h-6" alt="Instagram" />
+                        </a>
+
+                        <a href="https://in.linkedin.com/company/light-fox-studio-3d" target="_blank">
+                            <img src="linkedin-icon.png" class="w-6 h-6" alt="LinkedIn" />
+                        </a>
+
+                        <a href="https://wa.me" target="_blank">
+                            <img src="whatsapp-icon.png" class="w-6 h-6" alt="WhatsApp" />
+                        </a>
+                    </div>
+
                 </div>
             </div>
-        </footer>
+
+            <!-- Bottom copyright -->
+            <div class="mt-12 text-center text-gray-500 text-xs select-none">
+                © Copyright 2025 Light Fox Studios. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
     </div>
 
     <script>
@@ -318,6 +521,14 @@
         function contactEmail() {
             window.location.href = "mailto:contact@lightfoxstudio.com";
         }
+
+        
+        const toggleBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        toggleBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
 </body>
 
